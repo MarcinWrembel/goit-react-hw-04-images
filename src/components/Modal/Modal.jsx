@@ -1,36 +1,38 @@
-import React, { Component } from 'react';
+import React from 'react';
 import css from './Modal.module.css';
 import propTypes from 'prop-types';
+import { useEffect } from 'react';
 
-class Modal extends Component {
-  componentDidMount() {
-    window.addEventListener('keyup', this.handleClose);
-  }
+const Modal = ({ hideMod, largeImg }) => {
+  // useEffect(() => { function that will execute }, [ condition on which the function will execute ])
 
-  componentWillUnmount() {
-    window.removeEventListener('keyup', this.handleClose);
-  }
+  useEffect(() => {
+    const handleClose = event => {
+      if (event.code === 'Escape') {
+        return hideMod();
+      }
+    };
 
-  handleClose = event => {
-    if (event.code === 'Escape') {
-      return this.props.hideMod();
-    }
-  };
+    //action on mount
+    window.addEventListener('keyup', handleClose);
 
-  render() {
-    return (
-      <div className={css.overlay} onClick={this.props.hideMod}>
-        <div className={css.modal}>
-          <img src={this.props.largeImg} alt="result" />
-        </div>
+    //action on unmount
+    return () => {
+      window.removeEventListener('keyup', handleClose);
+    };
+  }, [hideMod]);
+
+  return (
+    <div className={css.overlay} onClick={hideMod}>
+      <div className={css.modal}>
+        <img src={largeImg} alt="result" />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Modal;
 
 Modal.propTypes = {
-    largeImg: propTypes.string,
-  };
-  
+  largeImg: propTypes.string,
+};
