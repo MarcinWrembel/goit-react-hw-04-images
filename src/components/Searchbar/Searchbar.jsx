@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import propTypes from 'prop-types';
 import { useState } from 'react';
 
-const Searchbar = ({ query, onFormSubmit }) => {
+const Searchbar = ({ query, onFormSubmit,baseQuery }) => {
   const [value, setValue] = useState('');
 
   const handleChange = event => {
@@ -14,9 +14,7 @@ const Searchbar = ({ query, onFormSubmit }) => {
   const handleSubmit = event => {
     event.preventDefault();
 
-    const val = value;
-
-    if (val.trim() !== '' && query !== value) {
+    if (value.trim() !== '' && query !== value) {
       onFormSubmit(value);
     } else if (value.trim() === '') {
       toast.info('Please enter any query', {
