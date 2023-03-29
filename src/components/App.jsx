@@ -8,7 +8,7 @@ import key from '../utils/key.json';
 import Modal from './Modal/Modal';
 import Button from './Button/Button';
 import Loader from './Loader/Loader';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -20,7 +20,6 @@ const KEY = Object.values(key);
 const PER_PAGE = 12;
 
 let params = '';
-let queryValue = '';
 
 const App = () => {
   const [images, setImages] = useState([]);
@@ -51,7 +50,7 @@ const App = () => {
       if (imageArr.totalHits > PER_PAGE && query !== phrase) {
         setPage(2);
       } else {
-        messageIfMax()
+        messageIfMax();
       }
     } catch (error) {
       //handling error
