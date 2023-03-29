@@ -104,16 +104,16 @@ const App = () => {
       //setting new state values
       setImages(imageArr.hits);
       setTotalHits(imageArr.totalHits);
-      setLastPage(checkIfLastPage(imageArr.totalHits));
 
       //changing state and add new images to existing ones on load more btn
       if (imageArr && imageArr.hits.length > 0) {
         setImages([...images, ...imageArr.hits]);
         setLoading(false);
         setPage(page + 1);
+        setLastPage(checkIfLastPage(imageArr.totalHits));
       }
 
-      if (isLastPage) {
+      if (checkIfLastPage(imageArr.totalHits)) {
         messageIfMax();
       }
     } catch (error) {
@@ -161,7 +161,7 @@ const App = () => {
       ) : (
         ''
       )}
-      {/* {isLastPage === true && messageIfMax()} */}
+
     </div>
   );
 };
