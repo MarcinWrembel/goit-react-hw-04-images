@@ -47,6 +47,10 @@ const App = () => {
       setTotalHits(imageArr.totalHits);
       setLastPage(checkIfLastPage(imageArr.totalHits));
 
+      if (checkIfLastPage(imageArr.totalHits)) {
+        messageIfMax();
+      }
+
       if (imageArr.totalHits > PER_PAGE && query !== phrase) {
         setPage(2);
       }
@@ -108,6 +112,10 @@ const App = () => {
         setLoading(false);
         setPage(page + 1);
       }
+
+      if (isLastPage) {
+        messageIfMax();
+      }
     } catch (error) {
       //handling error
 
@@ -153,7 +161,7 @@ const App = () => {
       ) : (
         ''
       )}
-      {isLastPage === true && messageIfMax()}
+      {/* {isLastPage === true && messageIfMax()} */}
     </div>
   );
 };
