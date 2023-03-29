@@ -49,8 +49,6 @@ const App = () => {
 
       if (imageArr.totalHits > PER_PAGE && query !== phrase) {
         setPage(2);
-      } else {
-        messageIfMax();
       }
     } catch (error) {
       //handling error
